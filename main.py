@@ -1,10 +1,6 @@
 
-print("Hi from K_branch")
-# Sanya prochitai i postav' like
-
-
 def foo():
-    pass
+    return 1+1
 
 
 if __name__ == '__main__':
