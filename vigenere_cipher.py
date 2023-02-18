@@ -10,6 +10,7 @@ ENG_upp_alphabet = string.ascii_uppercase
 RUS_ENG_low_alph = [ENG_low_alphabet, RUS_low_alphabet]
 RUS_ENG_upp_alph = [ENG_upp_alphabet, RUS_upp_alphabet]
 
+
 def is_letters(txt: str):
     for i in txt:
         if i.isalpha():
@@ -18,11 +19,18 @@ def is_letters(txt: str):
 
 
 def is_rus_eng_letters(txt: str, alph: bool):
+    """
+    return False if all letters are not from alphabet
+    :param txt: text
+    :param alph: True is RUS alphabet, False is ENG alphabet
+    :return: T/F
+    """
     letters = [ENG_low_alphabet + ENG_upp_alphabet, RUS_low_alphabet + RUS_upp_alphabet]
     for i in txt:
         if i in letters[alph]:
-            return False
-    return True
+            return True
+    return False
+
 
 def result_alph(lang: bool):
     global low_alph, upp_alph
