@@ -90,8 +90,8 @@ async def vigenere_start(message: types.Message):
 @dp.message_handler(Text(equals="Отмена"), state=[CryptText.choosing_language, CryptText.choosing_en_decrypt])
 # Залетаем сюда при нажатии "Отмена" и при состояниях из списка выше
 async def cancel(message: types.Message, state=FSMContext):
-    await message.delete()  # удаляем сообщание
-    await state.finish()  # сбрасываем машинное состояение
+    await message.delete()  # удаляем сообщение
+    await state.finish()  # сбрасываем машинное состояние
     await bot.send_message(chat_id=message.chat.id, text="Бот готов", reply_markup=kb)  # отправляем сообщение
     await CryptText.choosing_command.set()  # ставим первое состояние
 
@@ -101,7 +101,7 @@ async def cancel(message: types.Message, state=FSMContext):
 # Залетаем сюда при языковых командах и при состоянии "choosing_language"
 async def vigenere_1(message: types.Message, state=FSMContext):
     global data  # делаем переменную data глобальной, чтобы можно было её пользоваться ниже
-    async with state.proxy() as data:  # ??? что то типа открытия data как словаря
+    async with state.proxy() as data:  # ??? что-то типа открытия data как словаря
         data['lang'] = message.text  # и запись значения языка по ключу "lang"
     await CryptText.next()  # ставим следующее по списку состояние
     await bot.send_message(chat_id=message.chat.id, text="Зашифровать или расшифровать?",
